@@ -198,7 +198,7 @@ function setModo(m){
   document.getElementById('wrap-buscar').style.display=m==='consulta'?'block':'none';
   document.getElementById('btn-enviar').style.display='none';
   document.getElementById('progreso-wrap').style.display='none';
-  if(m==='consulta'){cedulaActual='';document.getElementById('cedula-error').style.display='none';document.getElementById('cedula-ok').style.display='none';document.getElementById('input-cedula').value='';}
+  if(m==='consulta'){cedulaActual='';document.getElementById('cedula-err').style.display='none';document.getElementById('cedula-ok').style.display='none';document.getElementById('input-cedula').value='';}
   if(m==='responder' && !sel.value){
     showToast('Selecciona primero tu público objetivo','err');
     modo='consulta';
@@ -247,7 +247,7 @@ function showToast(msg,tipo){
 
 async function verificarCedula(){
   const cedula = document.getElementById('input-cedula').value.trim();
-  const errEl = document.getElementById('cedula-error');
+  const errEl = document.getElementById('cedula-err');
   const okEl = document.getElementById('cedula-ok');
   const btn = document.getElementById('btn-verificar');
   errEl.style.display='none';
