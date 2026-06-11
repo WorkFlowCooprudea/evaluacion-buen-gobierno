@@ -362,9 +362,24 @@ async function enviarRespuestas(){
   btn.textContent='Enviar respuestas';
   btn.disabled=false;
   if(errores===0){
-    showToast('✓ Respuestas enviadas correctamente ('+filas.length+')','ok');
+    // Bloquear todo y mostrar confirmacion
+    document.getElementById('resultado').innerHTML='';
+    document.getElementById('progreso-wrap').style.display='none';
+    document.getElementById('btn-enviar').style.display='none';
+    document.getElementById('cedula-wrap').style.display='none';
+    document.getElementById('aviso-responder').style.display='none';
+    document.getElementById('btn-responder').disabled=true;
+    document.getElementById('btn-consulta').className='modo-btn activo';
+    document.getElementById('btn-responder').className='modo-btn';
+    modo='consulta';
+    // Mostrar mensaje de exito
+    const msg=document.createElement('div');
+    msg.style.cssText='background:#F0FAE6;border:1px solid #8CC44A;border-radius:10px;padding:1.5rem;text-align:center;margin-bottom:1rem';
+    msg.innerHTML='<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#3B6D11" stroke-width="2" style="display:block;margin:0 auto 12px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><div style="font-size:16px;font-weight:600;color:#3B6D11;margin-bottom:8px">¡Respuestas enviadas correctamente!</div><div style="font-size:14px;color:#5a5a56">Se registraron <strong>'+filas.length+'</strong> respuestas para la cédula <strong>'+cedulaActual+'</strong>.<br><br>Si necesitas corregir algo, contacta al administrador.</div>';
+    const container=document.querySelector('.container');
+    container.insertBefore(msg, container.firstChild);
     respuestas={};
-    render();
+    cedulaActual='';
   } else {
     showToast('Error al enviar algunas respuestas. Intenta de nuevo.','err');
   }
